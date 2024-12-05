@@ -34,7 +34,7 @@ export default {
         ],
         password: [
           { required: true, message: '请输入密码', trigger: ['blur', 'change'] },
-          { min: 5, max: 11, message: '长度为5-11个字符', trigger: ['blur', 'change'] }
+          { pattern: /^\w{5,11}$/, message: '长度为5-11个字符', trigger: ['blur', 'change'] }
         ]
       }
     }
