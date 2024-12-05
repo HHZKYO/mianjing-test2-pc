@@ -2,11 +2,18 @@
   <div class="login-page">
     <el-card class="login-card">
       <template #header>面经运营后台</template>
-      <div>
-        <div>内容</div>
-        <div>内容</div>
-        <div>内容</div>
-      </div>
+      <el-form>
+        <el-form-item label="用户名：">
+          <el-input placeholder="请输入用户名"></el-input>
+        </el-form-item>
+        <el-form-item label="密码：">
+          <el-input type="password" placeholder="请输入密码"></el-input>
+        </el-form-item>
+        <el-form-item class="tc">
+          <el-button type="primary">登录</el-button>
+          <el-button>重置</el-button>
+        </el-form-item>
+      </el-form>
     </el-card>
   </div>
 </template>
@@ -18,13 +25,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login-card {
-  width: 420px;
-  margin: 0 auto;
-  ::v-deep .el-card__header {
+.login-page {
+  min-height: 100vh;
+  background: url(@/assets/login-bg.svg) no-repeat center / cover;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .el-card {
+    width: 420px;
+    ::v-deep .el-card__header{
+      height: 80px;
+      background: rgba(114,124,245,1);
+      text-align: center;
+      line-height: 40px;
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+  .el-form {
+    padding: 0 20px;
+  }
+  .tc {
     text-align: center;
-    background-color: #727cf5;
-    color: white;
   }
 }
 </style>
