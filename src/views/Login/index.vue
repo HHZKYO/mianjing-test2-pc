@@ -43,7 +43,7 @@ export default {
     async login () {
       try {
         await this.$refs.form.validate()
-        console.log('通过校验，发送请求')
+        this.$store.dispatch('user/loginAction', this.form)
       } catch (e) {
         console.log(e)
       }

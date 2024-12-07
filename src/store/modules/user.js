@@ -1,3 +1,5 @@
+import { login } from '@/api/user'
+
 export default {
   namespaced: true,
   state () {
@@ -7,6 +9,11 @@ export default {
     }
   },
   mutations: {},
-  actions: {},
+  actions: {
+    async loginAction (context, obj) {
+      const res = await login(obj)
+      console.log(res.data.token)
+    }
+  },
   getters: {}
 }
