@@ -8,11 +8,15 @@ export default {
       words: '测试数据'
     }
   },
-  mutations: {},
+  mutations: {
+    setUserToken (state, newToken) {
+      state.token = newToken
+    }
+  },
   actions: {
     async loginAction (context, obj) {
       const res = await login(obj)
-      console.log(res.data.token)
+      context.commit('setUserToken', res.data.token)
     }
   },
   getters: {}
