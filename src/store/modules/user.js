@@ -1,16 +1,18 @@
 import { login } from '@/api/user'
+import { setToken, getToken } from '@/utils/storage'
 
 export default {
   namespaced: true,
   state () {
     return {
-      token: '',
+      token: getToken() || '',
       words: '测试数据'
     }
   },
   mutations: {
     setUserToken (state, newToken) {
       state.token = newToken
+      setToken(newToken)
     }
   },
   actions: {
