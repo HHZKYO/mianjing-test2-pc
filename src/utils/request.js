@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
+import store from '@/store'
 
 // 创建一个新的axios实例
 const request = axios.create({
@@ -10,6 +11,10 @@ const request = axios.create({
 // 添加请求拦截器
 request.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
+  const token = store.state.user.token
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
   return config
 }, function (error) {
   // 对请求错误做些什么

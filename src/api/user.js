@@ -7,3 +7,8 @@ export const login = ({ username, password }) => {
     password
   })
 }
+
+// 首页获取个人信息
+export const getUser = () => {
+  return request.get('/auth/currentUser')
+}
