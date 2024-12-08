@@ -43,7 +43,9 @@ export default {
     async login () {
       try {
         await this.$refs.form.validate()
-        this.$store.dispatch('user/loginAction', this.form)
+        await this.$store.dispatch('user/loginAction', this.form)
+        this.$message.success('恭喜登录成功')
+        this.$router.push('/')
       } catch (e) {
         console.log(e)
       }

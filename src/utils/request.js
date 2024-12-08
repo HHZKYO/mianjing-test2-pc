@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Message } from 'element-ui'
 
 // 创建一个新的axios实例
 const request = axios.create({
@@ -20,6 +21,9 @@ request.interceptors.response.use(function (response) {
   // 对响应数据做点什么
   return response.data
 }, function (error) {
+  if (error.response) {
+    Message.error(error.response.data.message)
+  }
   // 对响应错误做点什么
   return Promise.reject(error)
 })
