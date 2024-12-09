@@ -20,12 +20,20 @@
       <el-table
       :data="tableData"
       style="width: 100%">
-      <el-table-column prop="stem" label="标题" width="400"></el-table-column>
+      <el-table-column prop="stem" label="标题" width="300"></el-table-column>
       <el-table-column prop="creator" label="作者"></el-table-column>
       <el-table-column prop="likeCount" label="点赞"></el-table-column>
       <el-table-column prop="views" label="浏览数"></el-table-column>
       <el-table-column prop="createdAt" label="更新时间"></el-table-column>
-      <el-table-column label="编辑"></el-table-column>
+      <el-table-column label="编辑">
+        <template #default>
+          <div class="actions">
+            <i class="el-icon-view"></i>
+            <i class="el-icon-edit-outline"></i>
+            <i class="el-icon-delete"></i>
+          </div>
+        </template>
+      </el-table-column>
     </el-table>
     </el-card>
   </div>
