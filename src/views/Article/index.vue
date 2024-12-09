@@ -7,7 +7,7 @@
     <el-card shadow="never" border="false">
       <template #header>
         <div class="header">
-          <span>共 300 条记录</span>
+          <span>共 {{ total }} 条记录</span>
           <el-button
             icon="el-icon-plus"
             size="small"
@@ -20,20 +20,12 @@
       <el-table
       :data="tableData"
       style="width: 100%">
-      <el-table-column
-        prop="date"
-        label="日期"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="name"
-        label="姓名"
-        width="180">
-      </el-table-column>
-      <el-table-column
-        prop="address"
-        label="地址">
-      </el-table-column>
+      <el-table-column prop="stem" label="标题" width="400"></el-table-column>
+      <el-table-column prop="creator" label="作者"></el-table-column>
+      <el-table-column prop="likeCount" label="点赞"></el-table-column>
+      <el-table-column prop="views" label="浏览数"></el-table-column>
+      <el-table-column prop="createdAt" label="更新时间"></el-table-column>
+      <el-table-column label="编辑"></el-table-column>
     </el-table>
     </el-card>
   </div>
@@ -56,11 +48,12 @@ export default {
   },
   methods: {
     async initData () {
-      const res = await getArticleList({
+      const { data } = await getArticleList({
         current: this.current,
         pageSize: this.pageSize
       })
-      console.log(res)
+      this.total = data.total
+      this.tableData = data.rows
     }
   }
 }
