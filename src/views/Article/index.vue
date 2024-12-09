@@ -26,15 +26,23 @@
       <el-table-column prop="views" label="浏览数"></el-table-column>
       <el-table-column prop="createdAt" label="更新时间"></el-table-column>
       <el-table-column label="编辑">
-        <template #default>
+        <template #default="obj">
           <div class="actions">
             <i class="el-icon-view"></i>
             <i class="el-icon-edit-outline"></i>
-            <i class="el-icon-delete"></i>
+            <i @click="del(obj.row.id)" class="el-icon-delete"></i>
           </div>
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      background
+      @current-change="handleCurrentChange"
+      :current-page="current"
+      :page-size="pageSize"
+      :total="total"
+      layout="prev, pager, next">
+    </el-pagination>
     </el-card>
   </div>
 </template>
@@ -62,6 +70,10 @@ export default {
       })
       this.total = data.total
       this.tableData = data.rows
+    },
+    handleCurrentChange (val) {
+      this.current = val
+      this.initData()
     }
   }
 }
