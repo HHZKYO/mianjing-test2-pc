@@ -40,32 +40,28 @@
 </template>
 
 <script>
+import { getArticleList } from '@/api/article'
 export default {
   name: 'article-page',
   data () {
     return {
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+      tableData: [],
+      current: 1,
+      pageSize: 10,
+      total: 0
     }
   },
   created () {
+    this.initData()
   },
   methods: {
+    async initData () {
+      const res = await getArticleList({
+        current: this.current,
+        pageSize: this.pageSize
+      })
+      console.log(res)
+    }
   }
 }
 </script>
