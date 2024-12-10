@@ -53,12 +53,12 @@
       :before-close="handleClose"
       size="50%"
     >
-      <el-form label-width="80px">
-        <el-form-item label="标题">
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form-item label="标题" prop="stem">
           <el-input v-model="form.stem" placeholder="请输入面经内容"></el-input>
         </el-form-item>
-        <el-form-item label="内容">
-          <quillEditor v-model="form.content"></quillEditor>
+        <el-form-item label="内容" prop="content">
+          <quillEditor @blur="$refs.form.validateField('content')" v-model="form.content"></quillEditor>
         </el-form-item>
         <el-form-item>
           <el-button type="primary">确认</el-button>
@@ -89,6 +89,14 @@ export default {
       form: {
         stem: '',
         content: ''
+      },
+      rules: {
+        stem: [
+          { required: true, message: '请输入标题内容', trigger: 'blur' }
+        ],
+        content: [
+          { required: true, message: '请输入文章内容', trigger: 'blur' }
+        ]
       }
     }
   },
