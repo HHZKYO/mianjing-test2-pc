@@ -47,7 +47,7 @@
       </el-pagination>
     </el-card>
     <el-drawer
-      title="我是标题"
+      :title="drawerTitle"
       :visible.sync="isShowDraw"
       direction="rtl"
       :before-close="handleClose"
@@ -68,11 +68,21 @@ export default {
       current: 1,
       pageSize: 10,
       total: 0,
-      isShowDraw: false
+      isShowDraw: false,
+      drawerType: 'add'
     }
   },
   created () {
     this.initData()
+  },
+  computed: {
+    drawerTitle () {
+      let title = '标题'
+      if (this.drawerType === 'add') title = '添加面经'
+      if (this.drawerType === 'preview') title = '面经预览'
+      if (this.drawerType === 'edit') title = '修改面经'
+      return title
+    }
   },
   methods: {
     async initData () {
@@ -88,6 +98,7 @@ export default {
       this.initData()
     },
     openDrawer (type, id) {
+      this.drawerType = type
       this.isShowDraw = true
     },
     handleClose (done) {
