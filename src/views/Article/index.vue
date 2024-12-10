@@ -9,6 +9,7 @@
         <div class="header">
           <span>共 {{ total }} 条记录</span>
           <el-button
+            @click="openDrawer('add')"
             icon="el-icon-plus"
             size="small"
             type="primary"
@@ -28,8 +29,8 @@
       <el-table-column label="编辑">
         <template #default="obj">
           <div class="actions">
-            <i class="el-icon-view"></i>
-            <i class="el-icon-edit-outline"></i>
+            <i @click="openDrawer('preview', obj.row.id)" class="el-icon-view"></i>
+            <i @click="openDrawer('edit', obj.row.id)" class="el-icon-edit-outline"></i>
             <i @click="del(obj.row.id)" class="el-icon-delete"></i>
           </div>
         </template>
@@ -74,6 +75,9 @@ export default {
     handleCurrentChange (val) {
       this.current = val
       this.initData()
+    },
+    openDrawer (type, id) {
+      console.log('触发了', type, id)
     }
   }
 }
