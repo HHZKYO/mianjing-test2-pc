@@ -46,6 +46,15 @@
         layout="prev, pager, next">
       </el-pagination>
     </el-card>
+    <el-drawer
+      title="我是标题"
+      :visible.sync="isShowDraw"
+      direction="rtl"
+      :before-close="handleClose"
+      size="50%"
+    >
+      <span>我来啦!</span>
+    </el-drawer>
   </div>
 </template>
 
@@ -58,7 +67,8 @@ export default {
       tableData: [],
       current: 1,
       pageSize: 10,
-      total: 0
+      total: 0,
+      isShowDraw: false
     }
   },
   created () {
@@ -78,7 +88,14 @@ export default {
       this.initData()
     },
     openDrawer (type, id) {
-      console.log('触发了', type, id)
+      this.isShowDraw = true
+    },
+    handleClose (done) {
+      this.$confirm('你确认要关闭吗？').then(() => {
+        done()
+      }).catch(() => {
+        console.log('取消')
+      })
     }
   }
 }
