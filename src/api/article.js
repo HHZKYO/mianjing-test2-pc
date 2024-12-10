@@ -31,3 +31,8 @@ export const getArticleDetail = id => {
     params: { id }
   })
 }
+
+// 根据id提交修改文章
+export const updateArticle = ({ id, stem, content }) => {
+  return request.put('/admin/interview/update', { id, stem, content })
+}

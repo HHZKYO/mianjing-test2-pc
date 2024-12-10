@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { createArticle, getArticleDetail, getArticleList, removeArticle } from '@/api/article'
+import { createArticle, getArticleDetail, getArticleList, removeArticle, updateArticle } from '@/api/article'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -147,8 +147,15 @@ export default {
     },
     async submit () {
       await this.$refs.form.validate()
-      await createArticle(this.form)
-      this.$message.success('恭喜添加成功')
+      if (this.drawerType === 'add') {
+        await createArticle(this.form)
+        this.$message.success('恭喜添加成功')
+      }
+      if (this.drawerType === 'edit') {
+        const { id, stem, content } = this.form
+        await updateArticle({ id, stem, content })
+        this.$message.success('恭喜修改成功')
+      }
       this.closeDrawer()
       this.current = 1
       this.initData()
