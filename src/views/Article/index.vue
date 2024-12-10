@@ -19,31 +19,32 @@
         </div>
       </template>
       <el-table
-      :data="tableData"
-      style="width: 100%">
-      <el-table-column prop="stem" label="标题" width="300"></el-table-column>
-      <el-table-column prop="creator" label="作者"></el-table-column>
-      <el-table-column prop="likeCount" label="点赞"></el-table-column>
-      <el-table-column prop="views" label="浏览数"></el-table-column>
-      <el-table-column prop="createdAt" label="更新时间"></el-table-column>
-      <el-table-column label="编辑">
-        <template #default="obj">
-          <div class="actions">
-            <i @click="openDrawer('preview', obj.row.id)" class="el-icon-view"></i>
-            <i @click="openDrawer('edit', obj.row.id)" class="el-icon-edit-outline"></i>
-            <i @click="del(obj.row.id)" class="el-icon-delete"></i>
-          </div>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-pagination
-      background
-      @current-change="handleCurrentChange"
-      :current-page="current"
-      :page-size="pageSize"
-      :total="total"
-      layout="prev, pager, next">
-    </el-pagination>
+        :data="tableData"
+        style="width: 100%"
+      >
+        <el-table-column prop="stem" label="标题" width="300"></el-table-column>
+        <el-table-column prop="creator" label="作者"></el-table-column>
+        <el-table-column prop="likeCount" label="点赞"></el-table-column>
+        <el-table-column prop="views" label="浏览数"></el-table-column>
+        <el-table-column prop="createdAt" label="更新时间"></el-table-column>
+        <el-table-column label="编辑">
+          <template #default="obj">
+            <div class="actions">
+              <i @click="openDrawer('preview', obj.row.id)" class="el-icon-view"></i>
+              <i @click="openDrawer('edit', obj.row.id)" class="el-icon-edit-outline"></i>
+              <i @click="del(obj.row.id)" class="el-icon-delete"></i>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        background
+        @current-change="handleCurrentChange"
+        :current-page="current"
+        :page-size="pageSize"
+        :total="total"
+        layout="prev, pager, next">
+      </el-pagination>
     </el-card>
   </div>
 </template>
