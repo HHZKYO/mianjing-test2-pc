@@ -55,10 +55,10 @@
     >
       <el-form label-width="80px">
         <el-form-item label="标题">
-          <el-input placeholder="请输入面经内容"></el-input>
+          <el-input v-model="form.stem" placeholder="请输入面经内容"></el-input>
         </el-form-item>
         <el-form-item label="内容">
-          富文本编辑器
+          <quillEditor v-model="form.content"></quillEditor>
         </el-form-item>
         <el-form-item>
           <el-button type="primary">确认</el-button>
@@ -71,6 +71,11 @@
 
 <script>
 import { getArticleList } from '@/api/article'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+import { quillEditor } from 'vue-quill-editor'
 export default {
   name: 'article-page',
   data () {
@@ -80,7 +85,11 @@ export default {
       pageSize: 10,
       total: 0,
       isShowDraw: false,
-      drawerType: 'add'
+      drawerType: 'add',
+      form: {
+        stem: '',
+        content: ''
+      }
     }
   },
   created () {
@@ -94,6 +103,9 @@ export default {
       if (this.drawerType === 'edit') title = '修改面经'
       return title
     }
+  },
+  components: {
+    quillEditor
   },
   methods: {
     async initData () {
