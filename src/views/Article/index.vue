@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { createArticle, getArticleList, removeArticle } from '@/api/article'
+import { createArticle, getArticleDetail, getArticleList, removeArticle } from '@/api/article'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -128,9 +128,15 @@ export default {
       this.current = val
       this.initData()
     },
-    openDrawer (type, id) {
+    async openDrawer (type, id) {
       this.drawerType = type
       this.isShowDraw = true
+      if (type !== 'add') {
+        const res = await getArticleDetail(id)
+        this.form = {
+          ...res.data
+        }
+      }
     },
     handleClose (done) {
       this.$confirm('你确认要关闭吗？').then(() => {
@@ -148,6 +154,10 @@ export default {
       this.initData()
     },
     closeDrawer () {
+      this.form = {
+        stem: '',
+        content: ''
+      }
       this.$refs.form.resetFields()
       this.isShowDraw = false
     },

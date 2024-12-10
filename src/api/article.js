@@ -9,6 +9,7 @@ export const getArticleList = ({ current, pageSize }) => {
     }
   })
 }
+
 // 新增文章
 export const createArticle = ({ stem, content }) => {
   return request.post('/admin/interview/create', {
@@ -16,9 +17,17 @@ export const createArticle = ({ stem, content }) => {
     content
   })
 }
+
 // 删除文章
 export const removeArticle = (id) => {
   return request.delete('/admin/interview/remove', {
     data: { id }
+  })
+}
+
+// 根据id获取当前文章的详情->回显
+export const getArticleDetail = id => {
+  return request.get('/admin/interview/show', {
+    params: { id }
   })
 }
