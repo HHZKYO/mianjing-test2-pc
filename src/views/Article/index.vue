@@ -61,7 +61,7 @@
           <quillEditor @blur="$refs.form.validateField('content')" v-model="form.content"></quillEditor>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary">确认</el-button>
+          <el-button @click="submit" type="primary">确认</el-button>
           <el-button>取消</el-button>
         </el-form-item>
       </el-form>
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { getArticleList } from '@/api/article'
+import { createArticle, getArticleList } from '@/api/article'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -138,6 +138,14 @@ export default {
       }).catch(() => {
         console.log('取消')
       })
+    },
+    async submit () {
+      await this.$refs.form.validate()
+      await createArticle(this.form)
+      this.$message.success('恭喜添加成功')
+      this.isShowDraw = false
+      this.current = 1
+      this.initData()
     }
   }
 }
