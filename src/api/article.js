@@ -16,3 +16,9 @@ export const createArticle = ({ stem, content }) => {
     content
   })
 }
+// 删除文章
+export const removeArticle = (id) => {
+  return request.delete('/admin/interview/remove', {
+    data: { id }
+  })
+}

@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import { createArticle, getArticleList } from '@/api/article'
+import { createArticle, getArticleList, removeArticle } from '@/api/article'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -150,6 +150,14 @@ export default {
     closeDrawer () {
       this.$refs.form.resetFields()
       this.isShowDraw = false
+    },
+    async del (id) {
+      await removeArticle(id)
+      this.$message.success('删除成功')
+      if (this.tableData.length === 1 && this.current > 1) {
+        this.current--
+      }
+      this.initData()
     }
   }
 }
