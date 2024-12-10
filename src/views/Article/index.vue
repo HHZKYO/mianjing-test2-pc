@@ -62,7 +62,7 @@
         </el-form-item>
         <el-form-item>
           <el-button @click="submit" type="primary">确认</el-button>
-          <el-button>取消</el-button>
+          <el-button @click="handleClose">取消</el-button>
         </el-form-item>
       </el-form>
     </el-drawer>
@@ -134,7 +134,7 @@ export default {
     },
     handleClose (done) {
       this.$confirm('你确认要关闭吗？').then(() => {
-        done()
+        this.closeDrawer()
       }).catch(() => {
         console.log('取消')
       })
@@ -143,9 +143,13 @@ export default {
       await this.$refs.form.validate()
       await createArticle(this.form)
       this.$message.success('恭喜添加成功')
-      this.isShowDraw = false
+      this.closeDrawer()
       this.current = 1
       this.initData()
+    },
+    closeDrawer () {
+      this.$refs.form.resetFields()
+      this.isShowDraw = false
     }
   }
 }
