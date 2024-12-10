@@ -53,7 +53,18 @@
       :before-close="handleClose"
       size="50%"
     >
-      <span>我来啦!</span>
+      <el-form label-width="80px">
+        <el-form-item label="标题">
+          <el-input placeholder="请输入面经内容"></el-input>
+        </el-form-item>
+        <el-form-item label="内容">
+          富文本编辑器
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary">确认</el-button>
+          <el-button>取消</el-button>
+        </el-form-item>
+      </el-form>
     </el-drawer>
   </div>
 </template>
